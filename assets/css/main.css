@@ -1,0 +1,153 @@
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+   
+    /* background-color: #f5f5f5; */
+    color: azure;
+    
+    height: 100vh;
+    animation: slideGradient 20s linear infinite;
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background-size: 300% 300%;
+}
+@keyframes slideGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.page-title {
+    font-size: calc(5vw + 24px);
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.todo-container {
+    display: grid;
+    justify-content: center;
+}
+
+.todo-input {
+    padding: 6px 12px;
+    font-size: 40px;
+    border-radius: 12px;
+    border-color: white;
+}
+
+.todo-btn {
+    font-size: 18px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+ul {
+    list-style: none;
+}
+
+.todo-name {
+  flex-grow: 1;
+  color: #ffffff;
+}
+
+.todo-list {
+    border: 2px solid rgb(255, 255, 255);
+    padding: 12px;
+    border-block: none;
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 9px;
+}
+  
+.todo-item:has(input:checked) .todo-name {
+    text-decoration: line-through;
+    color: #ffffff;
+    opacity:0.5;
+}
+
+.filter {
+    border: 2px solid rgb(255, 255, 255);
+    border-top: none;
+    padding: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.todo-item {
+  border: 2px solid rgb(255, 246, 246);
+  color: black;
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 12px;
+  border-bottom: none;
+}
+
+[name="filter"] {
+    display: none;
+}
+
+.todo-list.completed li:not(:has(:checked)) {
+    display: none;
+} 
+
+.todo-list.active li:has(:checked) {
+    display: none;
+}
+
+label .destroy {
+  display: end;
+}
+
+.destroy {
+  border: none;
+  background: none;
+  color: rgb(17, 16, 16);
+}
+
+.todo-item label  {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.todo-name .editinput {
+  background-color: aqua;
+  border: none;
+  border-radius: 7px;
+}
