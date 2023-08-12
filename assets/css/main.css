@@ -91,11 +91,11 @@ ul {
     border-bottom-left-radius: 9px;
 }
   
-.todo-item:has(input:checked) .todo-name {
+/* .todo-item:has(input:checked) .todo-name {
     text-decoration: line-through;
     color: #ffffff;
     opacity:0.5;
-}
+} */
 
 .filter {
     border: 2px solid rgb(255, 255, 255);
@@ -150,4 +150,21 @@ label .destroy {
   background-color: aqua;
   border: none;
   border-radius: 7px;
+}
+
+ .todo-item.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+} 
+
+
+.clear-completed {
+  
+  border: none;
+  background: none;
+  color: white;
+}
+
+.unvisible {
+  display: none;
 }

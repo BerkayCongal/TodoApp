@@ -5,6 +5,7 @@ const todoList = document.querySelector(".todo-list");
 const todoInput = document.querySelector(".todo-input");
 const filterBtns = document.querySelectorAll('[name="filter"]');
 const footerId = document.querySelector("#footer-id");
+const clearCompltedBtn  = document.querySelector(".clear-completed");
 
 let count = 0;
 footerId.innerText = count
@@ -33,7 +34,6 @@ function addTodo(e) {
 
  todoInput.value = "",
  todoInput.focus();
-
  saveItem();
 }
 
@@ -96,6 +96,47 @@ function saveItem() {
 
 function dataLoad() {
     todoList.innerHTML = localStorage.getItem("data");
+    for(const e of todoList.children){
+     if(e.className === "todo-item completed"){
+        e.querySelector("input").checked = true
+    }
+}
 }
 
+clearCompltedBtn.addEventListener("click",clearComBtn);
+
+function clearComBtn() {
+    for (const el of document.querySelectorAll('li.completed')) {
+
+        el.remove();
+        
+    }
+} 
+
+
+function showClearbtn() {
+    if(document.querySelector(("li.completed")) === null ){
+        clearCompltedBtn.classList.add("unvisible")
+    }else{
+        clearCompltedBtn.classList.remove("unvisible");
+    }
+
+    
+}
+
+
+
+todoList.addEventListener("click",(e) => {
+    if(e.target.tagName === "INPUT" & e.target.type === "checkbox"){
+       let mainLi = e.target.parentElement.parentElement 
+       // tıkladıgımız input  li git sonra todolist clasname yanina completed ekle
+       mainLi.classList.toggle('completed')
+       showClearbtn();
+
+       saveItem();
+    }
+});
+
+
+showClearbtn();
 dataLoad();
