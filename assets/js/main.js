@@ -7,13 +7,14 @@ const filterBtns = document.querySelectorAll('[name="filter"]');
 const footerId = document.querySelector("#footer-id");
 const clearCompltedBtn  = document.querySelector(".clear-completed");
 
-
 todoForm.addEventListener("submit", addTodo);
 
 function addTodo(e) {
  e.preventDefault();
 
+
  if(todoInput.value === "") {return; }
+
 
  todoList.innerHTML += 
  `<li class="todo-item">
@@ -24,7 +25,6 @@ function addTodo(e) {
  </label>
  </li>
  `
-
  footerItemAll()
  todoInput.value = "",
  todoInput.focus();
@@ -32,6 +32,7 @@ function addTodo(e) {
 }
 
 // filters
+
 function filterTodos () {
    todoList.classList.value = "todo-list " + this.value
 }
@@ -40,12 +41,13 @@ filterBtns.forEach(filterBtn => {
 filterBtn.addEventListener("click", filterTodos)
 });
 
-//-delete btn
+
+//---Delete
 function removeTarget(el) {
     el.parentElement.parentElement.remove();
 }
-
 todoList.addEventListener("click",deleteBtn);
+
 function deleteBtn(e){
     const targetEl = e.target
     if(targetEl.classList.contains("destroy")) {
@@ -54,6 +56,7 @@ function deleteBtn(e){
         saveItem()
     };
 }
+
 
 //----Edit
 todoList.addEventListener("dblclick",(e) => {
@@ -78,53 +81,56 @@ function editTodo(e){
              e.replaceChild(firstText,input);
         };
     });
+
     input.focus();
+    saveItem()
 }
 
-
-// completed control delete
+// completed control
 clearCompltedBtn.addEventListener("click",clearComBtn);
+
 function clearComBtn() {
     for (const el of document.querySelectorAll('li.completed')) {
 
-        el.remove();
+        el.remove();  
     }
     showClearbtn()
+    saveItem()
 } 
 
-
 function showClearbtn() {
-    if(document.querySelector(("li.completed")) === null ){
+    if(document.querySelector((".todo-item.completed")) === null ){
         clearCompltedBtn.classList.add("unvisible")
     }else{
         clearCompltedBtn.classList.remove("unvisible");
     }
-
-    
+    saveItem()
 }
 
 // completed ekleme
 todoList.addEventListener("click", checkdurum)
 function checkdurum(e) {
    if(e.target.classList.contains("todo-checkbox")) {
+    
      e.target.parentElement.parentElement.classList.toggle("completed")
    }
    showClearbtn()
   footerItemAll();
+  saveItem()
 }
 
 
-
-// item sayma
-let itemleft = 0 
+let itemleft = 0
+    
  function footerItemAll() {
         itemleft = document.querySelectorAll(".todo-item:not(.completed)").length
         footerId.textContent =`${itemleft} İtem` 
         //  eger htmldeki html divindeki  back kitle  hem degeri hemde  ismini yazabildim
-}
+        saveItem()
+}   
 
+//--- data save
 
-//save data
 function saveItem() {
     localStorage.setItem("data",todoList.innerHTML);
 }
@@ -133,7 +139,4 @@ function dataLoad() {
     todoList.innerHTML = localStorage.getItem("data");
 }
 
-
-
-showClearbtn();
 dataLoad();
